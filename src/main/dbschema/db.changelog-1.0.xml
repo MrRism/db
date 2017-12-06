@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    
+    <changeSet id="1" author="me">
+        <createTable tableName="transport">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VELOCITY_AVERAGE" type="double precision"/>
+            <column name="NAME" type="varchar(255)"/>
+            <column name="AMOUNT_IN_PARK" type="bigint"/>
+            <column name="FUEL_USAGE" type="double precision"/>
+        </createTable>
+        <createTable tableName="path">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="DISTANCE" type="double precision"/>
+            <column name="START_POINT" type="varchar(255)"/>
+            <column name="END_POINT" type="varchar(255)"/>
+            <column name="STOPS_NUMBER" type="bigint"/>
+        </createTable>
+        <createTable tableName="route">
+            <column name="ROUTE_NUMBER" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="PRICE" type="double precision"/>
+            <column name="PASSANGERS_PER_DAY" type="double precision"/>
+            <column name="AMOUNT_ON_ROUTE" type="bigint"/>
+            <column name="TRANSPORT_ID" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_transport_id" references="Transport(ID)"/>
+            </column>
+            <column name="PATH_ID" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_path_id" references="Path(ID)"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+    
+
+    
+</databaseChangeLog>
+
